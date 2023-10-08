@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cocoai"
-version = "0.1.1"
+version = "0.1.4"
 description = "Instant answers to your CLI questions in the CLI of your choice."
 authors = ["dvlpjrs <jrs@dvlpjrs.me>"]
 repository = "https://github.com/dvlpjrs/coco"

@@ -28,7 +28,6 @@ class CocoAPI:
                 presence_penalty=0,
             )
             answer = response.choices[0].message.content
-            print(answer)
             return json.loads(answer)["commands"]
         except openai.error.Timeout as e:
             raise Exception("Please check your internet connection and try again.")

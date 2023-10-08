@@ -8,7 +8,7 @@ from InquirerPy import prompt
 from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
 from InquirerPy.separator import Separator
-from api import CocoAPI
+from cocoai.api import CocoAPI
 
 CONFIG_DIR = user_data_dir("coco", "coco")
 CONFIG_FILE = f"{CONFIG_DIR}/config.json"
