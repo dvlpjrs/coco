@@ -3,10 +3,12 @@ import os
 import json
 import platform
 import pyperclip
-import inquirer
 from appdirs import user_data_dir
-
-from cocoai.api import CocoAPI
+from InquirerPy import prompt
+from InquirerPy import inquirer
+from InquirerPy.base.control import Choice
+from InquirerPy.separator import Separator
+from api import CocoAPI
 
 CONFIG_DIR = user_data_dir("coco", "coco")
 CONFIG_FILE = f"{CONFIG_DIR}/config.json"
@@ -52,25 +54,18 @@ def main(question, ask, token):
         return
 
     if answers:
-        answers.append("None of the above")
-        q = [
-            inquirer.List(
-                "ans",
+        answers.append(Choice(value=None, name="None of the above"))
+        try:
+            selected_answer = inquirer.select(
                 message="Choose an option and press enter to copy to clipboard",
                 choices=answers,
-                carousel=False,
-            ),
-        ]
-        try:
-            selected_answer = inquirer.prompt(q)["ans"]
+                default=answers[0],
+            ).execute()
         except (KeyboardInterrupt, EOFError):
             click.echo("\nUser canceled the operation.")
             return
-        except Exception as e:
-            pass
-            return
 
-        if selected_answer == "None of the above":
+        if selected_answer == None:
             return
         pyperclip.copy(selected_answer)
         click.echo(selected_answer)

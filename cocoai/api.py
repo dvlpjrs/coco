@@ -14,7 +14,7 @@ class CocoAPI:
                 messages=[
                     {
                         "role": "system",
-                        "content": 'your name is coco, you assist users by providing valid cli commands only which can be multiple if required, based on there platform and the question asked by user. you response must be in format json array {"commands" : ["",""]}',
+                        "content": 'your name is coco, Assist users by providing list of valid cli commands based on platform and the question. you response must be in valid json format {"commands" : ["command1", "command2"]}. The output must be loadable by json.loads()',
                     },
                     {
                         "role": "user",
@@ -28,6 +28,7 @@ class CocoAPI:
                 presence_penalty=0,
             )
             answer = response.choices[0].message.content
+            print(answer)
             return json.loads(answer)["commands"]
         except openai.error.Timeout as e:
             raise Exception("Please check your internet connection and try again.")
